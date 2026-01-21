@@ -31,6 +31,7 @@ export const MOCK_TRIPS: Trip[] = [
     transportMode: TransportMode.AIRPLANE,
     origin: { lng: 116.4074, lat: 39.9042 },
     destination: { lng: 121.4737, lat: 31.2304 },
+    date: new Date(Date.now() - 1 * 365 * 24 * 60 * 60 * 1000).toISOString(), // 1年前
   },
   {
     id: '2',
@@ -38,6 +39,7 @@ export const MOCK_TRIPS: Trip[] = [
     transportMode: TransportMode.TRAIN,
     origin: { lng: 121.4737, lat: 31.2304 },
     destination: { lng: 120.1551, lat: 30.2741 },
+    date: new Date(Date.now() - 3 * 365 * 24 * 60 * 60 * 1000).toISOString(), // 3年前
   },
   {
     id: '3',
@@ -45,6 +47,15 @@ export const MOCK_TRIPS: Trip[] = [
     transportMode: TransportMode.CAR,
     origin: { lng: 120.1551, lat: 30.2741 },
     destination: { lng: 120.5853, lat: 31.2989 },
+    date: new Date(Date.now() - 7 * 365 * 24 * 60 * 60 * 1000).toISOString(), // 7年前
+  },
+  {
+    id: '4',
+    title: '苏州 → 南京 (火车)',
+    transportMode: TransportMode.TRAIN,
+    origin: { lng: 120.5853, lat: 31.2989 },
+    destination: { lng: 118.7674, lat: 32.0416 },
+    date: new Date(Date.now() - 12 * 365 * 24 * 60 * 60 * 1000).toISOString(), // 12年前
   },
 ];
 
