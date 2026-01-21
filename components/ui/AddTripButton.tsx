@@ -15,7 +15,7 @@ export function AddTripButton({
       disabled={disabled}
       className="
         fixed bottom-8 right-8 z-10
-        bg-orange-600 hover:bg-orange-700
+        bg-neutral-600/80 hover:bg-neutral-500/90
         text-white font-medium
         px-6 py-3 rounded-lg
         shadow-lg
