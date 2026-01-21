@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { MOCK_TRIPS } from '@/types/trip';
+import { useStartupView } from '@/hooks/useStartupView';
 
 // 动态导入并禁用 SSR
 const AMapView = dynamic(() => import('@/components/map/AMapView').then(mod => ({ default: mod.AMapView })), {
@@ -32,6 +33,12 @@ const CityLabelLayer = dynamic(() => import('@/components/map/CityLabelLayer').t
 export default function Home() {
   const [map, setMap] = useState<any>(null);
 
+  // 使用启动视角管理 hook
+  const { onPolylineReady } = useStartupView({
+    trips: MOCK_TRIPS,
+    map: map,
+  });
+
   const handleMapReady = (mapInstance: any) => {
     console.log('Map ready:', mapInstance);
     setMap(mapInstance);
@@ -42,7 +49,12 @@ export default function Home() {
       <AMapView onMapReady={handleMapReady} />
       {map && <CityLabelLayer map={map} />}
       {map && MOCK_TRIPS.map(trip => (
-        <JourneyPolyline key={trip.id} map={map} trip={trip} />
+        <JourneyPolyline
+          key={trip.id}
+          map={map}
+          trip={trip}
+          onPolylineReady={onPolylineReady}
+        />
       ))}
       <AddTripButton />
     </main>

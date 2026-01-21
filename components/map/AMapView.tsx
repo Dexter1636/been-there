@@ -63,6 +63,7 @@ export function AMapView({
                 zoomEnable: true, // 保留滚轮缩放
                 doubleClickZoom: false, // 禁用双击缩放
                 keyboardEnable: false, // 禁用键盘控制
+                zooms: [3, 7.8], // 缩放范围限制
                 // 极简样式配置
                 mapStyle: AMAP_CONFIG.MAP_STYLE,
                 features: AMAP_CONFIG.MAP_FEATURES,

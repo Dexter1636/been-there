@@ -8,9 +8,10 @@ import { routeService } from '@/lib/route-service';
 interface JourneyPolylineProps {
   map: any;
   trip: Trip;
+  onPolylineReady?: (polyline: any) => void;
 }
 
-export function JourneyPolyline({ map, trip }: JourneyPolylineProps) {
+export function JourneyPolyline({ map, trip, onPolylineReady }: JourneyPolylineProps) {
   const polylineRef = useRef<any>(null);
   const [isInitializing, setIsInitializing] = useState(true);
 
@@ -58,8 +59,8 @@ export function JourneyPolyline({ map, trip }: JourneyPolylineProps) {
         map.add(polyline);
         polylineRef.current = polyline;
 
-        // 自动适配视角
-        map.setFitView([polyline], false, [80, 80, 80, 80]);
+        // 通知父组件该轨迹已准备好
+        onPolylineReady?.(polyline);
       } catch (error) {
         console.error('Failed to draw route:', error);
 
@@ -81,7 +82,8 @@ export function JourneyPolyline({ map, trip }: JourneyPolylineProps) {
 
           map.add(polyline);
           polylineRef.current = polyline;
-          map.setFitView([polyline], false, [80, 80, 80, 80]);
+          // 通知父组件该轨迹已准备好（降级情况）
+          onPolylineReady?.(polyline);
         }
       }
     };
